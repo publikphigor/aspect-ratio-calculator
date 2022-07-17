@@ -5,7 +5,72 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Koladele Olaitan" />
+    <meta
+      name="description"
+      content="This is a simple tool for calculating image sizes for different aspect ratios."
+    />
     <title>Aspect Ratio - Image Size Calculator</title>
   </head>
-  <body></body>
+  <body>
+    <!-- ==== select an aspect ratio ==== -->
+    <div class="aspect-ratio-container">
+      <h1 class="title">Select aspect ratio</h1>
+      <div class="as-buttons">
+        <button class="as-btn" data-ratio-number="1">
+          4K Ultra HD (3840 x 2160) [16:9]
+        </button>
+        <button class="as-btn" data-ratio-number="2">
+          Full HD (1920 x 1080) [16:9]
+        </button>
+        <button class="as-btn" data-ratio-number="3">
+          HD-Ready (1280 x 720) [16:9]
+        </button>
+        <button class="as-btn" data-ratio-number="4">
+          WUXGA (1920 x 1200) [16:10]
+        </button>
+        <button class="as-btn" data-ratio-number="5">
+          UWQHD (3440 x 1440) [21:9]
+        </button>
+        <button class="as-btn" data-ratio-number="6">
+          Anamorphic [2.39:1]
+        </button>
+        <button class="as-btn" data-ratio-number="7">NTSC/PAL [4:3]</button>
+      </div>
+    </div>
+
+    <!-- ==== supply at least one size of the image ==== -->
+    <div class="image-dimensions-container">
+      <h1 class="title">Supply the size you know</h1>
+      <p class="desc">
+        Input one size (width, height or diagonal) and the rest will be
+        calculated.
+      </p>
+      <div class="image-dimensions">
+        <div class="input-group">
+          <label for="diagonal-cm">Diagonal</label>
+          <input type="number" id="diagonal-cm" />
+          <input type="number" id="diagonal-inches" />
+        </div>
+
+        <div class="input-group">
+          <label for="width-cm">Width</label>
+          <input type="number" id="width-cm" />
+          <input type="number" id="width-inches" />
+        </div>
+
+        <div class="input-group">
+          <label for="height-cm">Height</label>
+          <input type="number" id="height-cm" />
+          <input type="number" id="height-inches" />
+        </div>
+      </div>
+
+      <button class="calc-btn">Calculate</button>
+    </div>
+
+    <p class="footer-copyright">
+      &copy; 2022 -
+      <a href="https://koladeleolaitan.com/">Built by Koladele Olaitan</a>
+    </p>
+  </body>
 </html>
