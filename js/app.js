@@ -64,10 +64,10 @@ const ratios = [ratio1, ratio2, ratio3, ratio4, ratio5, ratio6, ratio7];
 // select all aspect ratio buttons
 const asBtn = document.querySelectorAll(".as-btn");
 
-// store number of selected aspect ratio
+// store number of selected aspect ratio and set default aspect ratio
 let selAspectRatio;
-let wr = 1.777;
-let hr = 0.563;
+let wr = 0.563;
+let hr = 1.777;
 
 // change color of button when clicked
 function selARBtn(e) {
@@ -84,9 +84,6 @@ function selARBtn(e) {
 asBtn.forEach((btn) =>
   btn.addEventListener("click", function (e) {
     selARBtn(e);
-    selInputVal();
-
-    calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr);
 
     // call display-values function
     displayValues();
@@ -95,14 +92,21 @@ asBtn.forEach((btn) =>
 
 // select all input fields and calculate-button
 const calcBtn = document.querySelector(".calc-btn");
+
+let allInputFields = document.querySelectorAll(".dimension-input");
 let [dCm, dIn, wCm, wIn, hCm, hIn] = "";
 function selInputVal() {
-  dCm = Number(document.querySelector("#diagonal-cm").value);
-  dIn = Number(document.querySelector("#diagonal-inches").value);
-  wCm = Number(document.querySelector("#width-cm").value);
-  wIn = Number(document.querySelector("#width-inches").value);
-  hCm = Number(document.querySelector("#height-cm").value);
-  hIn = Number(document.querySelector("#height-inches").value);
+  // only get the value if there is an actual value
+  allInputFields.forEach((inp) => {
+    if (inp.value.trim() !== "") {
+      dCm = Number(document.querySelector("#diagonal-cm").value);
+      dIn = Number(document.querySelector("#diagonal-inches").value);
+      wCm = Number(document.querySelector("#width-cm").value);
+      wIn = Number(document.querySelector("#width-inches").value);
+      hCm = Number(document.querySelector("#height-cm").value);
+      hIn = Number(document.querySelector("#height-inches").value);
+    }
+  });
 }
 
 // get other dimensions from the supplied dimensions
@@ -119,49 +123,91 @@ function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
   // if height is passed in cm/inch, calculate width and diagonal in cm/inch
   if (hCm) {
     dCm = Math.sqrt((hCm * wr) ** 2 + hCm ** 2);
-    widthCm = Number(Math.sqrt(dCm ** 2 - hCm ** 2).toFixed(1));
-    diagonalCm = Number(dCm.toFixed(1));
+    wCm = Number((hCm * wr).toFixed(1));
+    dIn = conToInch(dCm);
+    hIn = conToInch(hCm);
+    wIn = conToInch(wCm);
     heightCm = Number(hCm.toFixed(1));
+    heightInch = Number(hIn.toFixed(1));
+    widthCm = Number(wCm.toFixed(1));
+    widthInch = Number(wIn.toFixed(1));
+    diagonalCm = Number(dCm.toFixed(1));
+    diagonalInch = Number(dIn.toFixed(1));
   }
 
   if (hIn) {
     dIn = Math.sqrt((hIn * wr) ** 2 + hIn ** 2);
-    widthInch = Number(Math.sqrt(dIn ** 2 - hIn ** 2).toFixed(1));
-    diagonalInch = Number(dIn.toFixed(1));
+    wIn = Number((hIn * wr).toFixed(1));
+    dCm = conToCm(dIn);
+    hCm = conToCm(hIn);
+    wCm = conToCm(wIn);
     heightInch = Number(hIn.toFixed(1));
+    heightCm = Number(hCm.toFixed(1));
+    widthInch = Number(wIn.toFixed(1));
+    widthCm = Number(wCm.toFixed(1));
+    diagonalInch = Number(dIn.toFixed(1));
+    diagonalCm = Number(dCm.toFixed(1));
   }
 
   // if width is passed in cm/inch, calculate height and diagonal in cm/inch
   if (wCm) {
-    dCm = Math.sqrt((wCm * wr) ** 2 + wCm ** 2);
-    heightCm = Number(Math.sqrt(dCm ** 2 - wCm ** 2).toFixed(1));
-    diagonalCm = Number(dCm.toFixed(1));
+    dCm = Math.sqrt((wCm * hr) ** 2 + wCm ** 2);
+    hCm = Number((wCm * hr).toFixed(1));
+    dIn = conToInch(dCm);
+    hIn = conToInch(hCm);
+    wIn = conToInch(wCm);
+    heightCm = Number(hCm.toFixed(1));
+    heightInch = Number(hIn.toFixed(1));
     widthCm = Number(wCm.toFixed(1));
+    widthInch = Number(wIn.toFixed(1));
+    diagonalCm = Number(dCm.toFixed(1));
+    diagonalInch = Number(dIn.toFixed(1));
   }
 
   if (wIn) {
-    dIn = Math.sqrt((wIn * wr) ** 2 + wIn ** 2);
-    heightIn = Number(Math.sqrt(dIn ** 2 - wIn ** 2).toFixed(1));
+    dIn = Math.sqrt((wIn * hr) ** 2 + wIn ** 2);
+    hIn = Number((wIn * hr).toFixed(1));
+    dCm = conToCm(dIn);
+    hCm = conToCm(hIn);
+    wCm = conToCm(wIn);
+    heightInch = Number(hIn.toFixed(1));
+    heightCm = Number(hCm.toFixed(1));
+    widthInch = Number(wIn.toFixed(1));
+    widthCm = Number(wCm.toFixed(1));
     diagonalInch = Number(dIn.toFixed(1));
+    diagonalCm = Number(dCm.toFixed(1));
   }
 
   // if diagonal is passed in cm/inch, calculate height and width in cm/inch
   if (dCm) {
     hCm = dCm / Math.sqrt(wr ** 2 + 1);
-    wCm = Math.sqrt(dCm ** 2 - hCm ** 2);
+    wCm = hCm * wr;
+    dIn = conToInch(dCm);
+    hIn = conToInch(hCm);
+    wIn = conToInch(wCm);
     heightCm = Number(hCm.toFixed(1));
+    heightInch = Number(hIn.toFixed(1));
     widthCm = Number(wCm.toFixed(1));
+    widthInch = Number(wIn.toFixed(1));
     diagonalCm = Number(dCm.toFixed(1));
+    diagonalInch = Number(dIn.toFixed(1));
   }
 
   if (dIn) {
     hIn = dIn / Math.sqrt(wr ** 2 + 1);
-    wIn = Math.sqrt(dIn ** 2 - hIn ** 2);
+    wIn = hIn * wr;
+    dCm = conToCm(dIn);
+    hCm = conToCm(hIn);
+    wCm = conToCm(wIn);
     heightInch = Number(hIn.toFixed(1));
+    heightCm = Number(hCm.toFixed(1));
     widthInch = Number(wIn.toFixed(1));
+    widthCm = Number(wCm.toFixed(1));
     diagonalInch = Number(dIn.toFixed(1));
+    diagonalCm = Number(dCm.toFixed(1));
   }
 
+  /*
   // add all values to their respective arrays
   arrCmValues.splice(0, 0, diagonalCm, widthCm, heightCm);
   arrInchValues.splice(0, 0, diagonalInch, widthInch, heightInch);
@@ -174,21 +220,25 @@ function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
   if (wIn || hIn || dIn) {
     convertToCm(arrInchValues);
   }
+
+  */
 }
 
 // cm to inches and vice versa
+const conToCm = (val) => Number((val * 0.394).toFixed(1));
+const conToInch = (val) => Number((val / 2.54).toFixed(1));
+
+// arr method
 function convertToInch(arr) {
-  const newInchesValues = arr.map((cm) => {
+  [diagonalInch, widthInch, heightInch] = arr.map((cm) => {
     return Number(cm / (2.54).toFixed(1));
   });
-  [diagonalInch, widthInch, heightInch] = [...newInchesValues];
 }
 
 function convertToCm(arr) {
-  const newCmValues = arr.map((inch) => {
+  [diagonalCm, widthCm, heightCm] = arr.map((inch) => {
     return Number(inch * (0.394).toFixed(1));
   });
-  [diagonalCm, widthCm, heightCm] = [...newCmValues];
 }
 
 // display-values function
@@ -201,13 +251,17 @@ function displayValues() {
   hIn = document.querySelector("#height-inches").value = heightInch;
 }
 
-// call calculate function on button click
+// call calculate function on change in keypress
+allInputFields.forEach((inp) => {
+  inp.addEventListener("input", function () {
+    selInputVal();
+
+    calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr);
+  });
+});
+
+// display values when calc-btn is clicked
 calcBtn.addEventListener("click", function () {
-  selInputVal();
-
-  calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr);
-
-  // call display-values function
   displayValues();
 });
 
