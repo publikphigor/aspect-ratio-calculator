@@ -123,59 +123,59 @@ function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
   // if height is passed in cm/inch, calculate width and diagonal in cm/inch
   if (hCm) {
     dCm = Math.sqrt((hCm * wr) ** 2 + hCm ** 2);
-    wCm = Number((hCm * wr).toFixed(1));
+    wCm = Number((hCm * wr).toFixed(2));
     dIn = conToInch(dCm);
     hIn = conToInch(hCm);
     wIn = conToInch(wCm);
-    heightCm = Number(hCm.toFixed(1));
-    heightInch = Number(hIn.toFixed(1));
-    widthCm = Number(wCm.toFixed(1));
-    widthInch = Number(wIn.toFixed(1));
-    diagonalCm = Number(dCm.toFixed(1));
-    diagonalInch = Number(dIn.toFixed(1));
+    heightCm = Number(hCm.toFixed(2));
+    heightInch = Number(hIn.toFixed(2));
+    widthCm = Number(wCm.toFixed(2));
+    widthInch = Number(wIn.toFixed(2));
+    diagonalCm = Number(dCm.toFixed(2));
+    diagonalInch = Number(dIn.toFixed(2));
   }
 
   if (hIn) {
     dIn = Math.sqrt((hIn * wr) ** 2 + hIn ** 2);
-    wIn = Number((hIn * wr).toFixed(1));
+    wIn = Number((hIn * wr).toFixed(2));
     dCm = conToCm(dIn);
     hCm = conToCm(hIn);
     wCm = conToCm(wIn);
-    heightInch = Number(hIn.toFixed(1));
-    heightCm = Number(hCm.toFixed(1));
-    widthInch = Number(wIn.toFixed(1));
-    widthCm = Number(wCm.toFixed(1));
-    diagonalInch = Number(dIn.toFixed(1));
-    diagonalCm = Number(dCm.toFixed(1));
+    heightInch = Number(hIn.toFixed(2));
+    heightCm = Number(hCm.toFixed(2));
+    widthInch = Number(wIn.toFixed(2));
+    widthCm = Number(wCm.toFixed(2));
+    diagonalInch = Number(dIn.toFixed(2));
+    diagonalCm = Number(dCm.toFixed(2));
   }
 
   // if width is passed in cm/inch, calculate height and diagonal in cm/inch
   if (wCm) {
     dCm = Math.sqrt((wCm * hr) ** 2 + wCm ** 2);
-    hCm = Number((wCm * hr).toFixed(1));
+    hCm = Number((wCm * hr).toFixed(2));
     dIn = conToInch(dCm);
     hIn = conToInch(hCm);
     wIn = conToInch(wCm);
-    heightCm = Number(hCm.toFixed(1));
-    heightInch = Number(hIn.toFixed(1));
-    widthCm = Number(wCm.toFixed(1));
-    widthInch = Number(wIn.toFixed(1));
-    diagonalCm = Number(dCm.toFixed(1));
-    diagonalInch = Number(dIn.toFixed(1));
+    heightCm = Number(hCm.toFixed(2));
+    heightInch = Number(hIn.toFixed(2));
+    widthCm = Number(wCm.toFixed(2));
+    widthInch = Number(wIn.toFixed(2));
+    diagonalCm = Number(dCm.toFixed(2));
+    diagonalInch = Number(dIn.toFixed(2));
   }
 
   if (wIn) {
     dIn = Math.sqrt((wIn * hr) ** 2 + wIn ** 2);
-    hIn = Number((wIn * hr).toFixed(1));
+    hIn = Number((wIn * hr).toFixed(2));
     dCm = conToCm(dIn);
     hCm = conToCm(hIn);
     wCm = conToCm(wIn);
-    heightInch = Number(hIn.toFixed(1));
-    heightCm = Number(hCm.toFixed(1));
-    widthInch = Number(wIn.toFixed(1));
-    widthCm = Number(wCm.toFixed(1));
-    diagonalInch = Number(dIn.toFixed(1));
-    diagonalCm = Number(dCm.toFixed(1));
+    heightInch = Number(hIn.toFixed(2));
+    heightCm = Number(hCm.toFixed(2));
+    widthInch = Number(wIn.toFixed(2));
+    widthCm = Number(wCm.toFixed(2));
+    diagonalInch = Number(dIn.toFixed(2));
+    diagonalCm = Number(dCm.toFixed(2));
   }
 
   // if diagonal is passed in cm/inch, calculate height and width in cm/inch
@@ -185,12 +185,12 @@ function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
     dIn = conToInch(dCm);
     hIn = conToInch(hCm);
     wIn = conToInch(wCm);
-    heightCm = Number(hCm.toFixed(1));
-    heightInch = Number(hIn.toFixed(1));
-    widthCm = Number(wCm.toFixed(1));
-    widthInch = Number(wIn.toFixed(1));
-    diagonalCm = Number(dCm.toFixed(1));
-    diagonalInch = Number(dIn.toFixed(1));
+    heightCm = Number(hCm.toFixed(2));
+    heightInch = Number(hIn.toFixed(2));
+    widthCm = Number(wCm.toFixed(2));
+    widthInch = Number(wIn.toFixed(2));
+    diagonalCm = Number(dCm.toFixed(2));
+    diagonalInch = Number(dIn.toFixed(2));
   }
 
   if (dIn) {
@@ -199,12 +199,12 @@ function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
     dCm = conToCm(dIn);
     hCm = conToCm(hIn);
     wCm = conToCm(wIn);
-    heightInch = Number(hIn.toFixed(1));
-    heightCm = Number(hCm.toFixed(1));
-    widthInch = Number(wIn.toFixed(1));
-    widthCm = Number(wCm.toFixed(1));
-    diagonalInch = Number(dIn.toFixed(1));
-    diagonalCm = Number(dCm.toFixed(1));
+    heightInch = Number(hIn.toFixed(2));
+    heightCm = Number(hCm.toFixed(2));
+    widthInch = Number(wIn.toFixed(2));
+    widthCm = Number(wCm.toFixed(2));
+    diagonalInch = Number(dIn.toFixed(2));
+    diagonalCm = Number(dCm.toFixed(2));
   }
 
   /*
@@ -225,19 +225,19 @@ function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
 }
 
 // cm to inches and vice versa
-const conToCm = (val) => Number((val * 0.394).toFixed(1));
-const conToInch = (val) => Number((val / 2.54).toFixed(1));
+const conToCm = (val) => Number((val * 0.394).toFixed(2));
+const conToInch = (val) => Number((val / 2.54).toFixed(2));
 
 // arr method
 function convertToInch(arr) {
   [diagonalInch, widthInch, heightInch] = arr.map((cm) => {
-    return Number(cm / (2.54).toFixed(1));
+    return Number(cm / (2.54).toFixed(2));
   });
 }
 
 function convertToCm(arr) {
   [diagonalCm, widthCm, heightCm] = arr.map((inch) => {
-    return Number(inch * (0.394).toFixed(1));
+    return Number(inch * (0.394).toFixed(2));
   });
 }
 
