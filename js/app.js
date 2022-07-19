@@ -1,3 +1,20 @@
+/* 
+======================================== MESSAGE FROM DEV =======================================
+
+Hello stranger! This is a message from Koladele Olaitan (publikphigor).
+
+It took me days to make this code work. I could easily just see a tutorial about it on the internet but I've been learning the core of JavaScript (from Jonas Schmedtmann) and I want to flex my muscles. This might be a small app to make but I must confess it was a challenge. (Actually more of a maths challenge than JavaScript).
+
+At the time of this commenting (July 19, 2022 - 04:00AM WAT), the maths is not mathing and I'm a bit frustrated. If you happen to use this tool when everything works, then you should also learn to never give up (because I almost did).
+
+Feel free to fork the repo, copy the code and do whatever you want with it. I'll be so proud if someone finds my code worthy of copying. lol
+
+
+If you read until this point, I love you!
+
+======================================== END OF MESSAGE =======================================
+*/
+
 // Aspect ratios, hr and wr stands for height ratio (16/9) and width ratio (9/16) respectively
 
 const ratio1 = {
@@ -64,7 +81,17 @@ function selARBtn(e) {
   hr = ratios[selAspectRatio].hr;
 }
 
-asBtn.forEach((btn) => btn.addEventListener("click", selARBtn));
+asBtn.forEach((btn) =>
+  btn.addEventListener("click", function (e) {
+    selARBtn(e);
+    selInputVal();
+
+    calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr);
+
+    // call display-values function
+    displayValues();
+  })
+);
 
 // select all input fields and calculate-button
 const calcBtn = document.querySelector(".calc-btn");
@@ -185,18 +212,18 @@ calcBtn.addEventListener("click", function () {
 });
 
 /*
-const width = function calcWidth(h, d, hr, wr) {
-  if (h) {
-    d = Math.sqrt((h * hr) ** 2 + h ** 2);
-    return Math.sqrt(d ** 2 - h ** 2);
-  }
-};
 
-const height = function calcHeight(w, wr) {
-  if (w) {
-    d = Math.sqrt((w * wr) ** 2 + w ** 2);
-    return Math.sqrt(d ** 2 - w ** 2);
+btnLinks = document.querySelectorAll(".brz-a.brz-container-link");
+btnLinks.forEach((link) => {
+  if (
+    link.href.trim() === "https://626nightmarket.cococart.co" ||
+    link.href.trim() === "https://626nightmarket.cococart.co/"
+  ) {
+    link.closest("brz-row__container.brz-css-hluqc").classList.add("d-none");
+  } else {
+    link.closest("brz-row__container.brz-css-hluqc").classList.remove("d-none");
   }
-};
+});
+
 
 */
