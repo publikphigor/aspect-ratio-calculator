@@ -118,8 +118,8 @@ let diagonalCm;
 let diagonalInch;
 
 function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
-  // if height is passed in cm/inch, calculate width and diagonal in cm/inch
   if (hCm) {
+    // if height is passed in cm/inch, calculate width and diagonal in cm/inch
     dCm = Math.sqrt((hCm * wr) ** 2 + hCm ** 2);
     wCm = Number((hCm * wr).toFixed(2));
     dIn = conToInch(dCm);
@@ -236,20 +236,3 @@ allInputFields.forEach((inp) => {
 calcBtn.addEventListener("click", function () {
   displayValues();
 });
-
-/*
-
-btnLinks = document.querySelectorAll(".brz-a.brz-container-link");
-btnLinks.forEach((link) => {
-  if (
-    link.href.trim() === "https://626nightmarket.cococart.co" ||
-    link.href.trim() === "https://626nightmarket.cococart.co/"
-  ) {
-    link.closest("brz-row__container.brz-css-hluqc").classList.add("d-none");
-  } else {
-    link.closest("brz-row__container.brz-css-hluqc").classList.remove("d-none");
-  }
-});
-
-
-*/
