@@ -69,7 +69,7 @@ let selAspectRatio;
 let wr = 0.563;
 let hr = 1.777;
 
-// change color of button when clicked
+// change color of button when clicked and set new values of wr and hr
 function selARBtn(e) {
   asBtn.forEach((btn) => {
     btn.classList.remove("active");
@@ -116,8 +116,6 @@ let heightCm;
 let heightInch;
 let diagonalCm;
 let diagonalInch;
-let arrCmValues = [];
-let arrInchValues = [];
 
 function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
   // if height is passed in cm/inch, calculate width and diagonal in cm/inch
@@ -133,9 +131,7 @@ function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
     widthInch = Number(wIn.toFixed(2));
     diagonalCm = Number(dCm.toFixed(2));
     diagonalInch = Number(dIn.toFixed(2));
-  }
-
-  if (hIn) {
+  } else if (hIn) {
     dIn = Math.sqrt((hIn * wr) ** 2 + hIn ** 2);
     wIn = Number((hIn * wr).toFixed(2));
     dCm = conToCm(dIn);
@@ -147,10 +143,8 @@ function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
     widthCm = Number(wCm.toFixed(2));
     diagonalInch = Number(dIn.toFixed(2));
     diagonalCm = Number(dCm.toFixed(2));
-  }
-
-  // if width is passed in cm/inch, calculate height and diagonal in cm/inch
-  if (wCm) {
+  } else if (wCm) {
+    // if width is passed in cm/inch, calculate height and diagonal in cm/inch
     dCm = Math.sqrt((wCm * hr) ** 2 + wCm ** 2);
     hCm = Number((wCm * hr).toFixed(2));
     dIn = conToInch(dCm);
@@ -162,9 +156,7 @@ function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
     widthInch = Number(wIn.toFixed(2));
     diagonalCm = Number(dCm.toFixed(2));
     diagonalInch = Number(dIn.toFixed(2));
-  }
-
-  if (wIn) {
+  } else if (wIn) {
     dIn = Math.sqrt((wIn * hr) ** 2 + wIn ** 2);
     hIn = Number((wIn * hr).toFixed(2));
     dCm = conToCm(dIn);
@@ -176,10 +168,8 @@ function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
     widthCm = Number(wCm.toFixed(2));
     diagonalInch = Number(dIn.toFixed(2));
     diagonalCm = Number(dCm.toFixed(2));
-  }
-
-  // if diagonal is passed in cm/inch, calculate height and width in cm/inch
-  if (dCm) {
+  } else if (dCm) {
+    // if diagonal is passed in cm/inch, calculate height and width in cm/inch
     hCm = dCm / Math.sqrt(wr ** 2 + 1);
     wCm = hCm * wr;
     dIn = conToInch(dCm);
@@ -191,9 +181,7 @@ function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
     widthInch = Number(wIn.toFixed(2));
     diagonalCm = Number(dCm.toFixed(2));
     diagonalInch = Number(dIn.toFixed(2));
-  }
-
-  if (dIn) {
+  } else if (dIn) {
     hIn = dIn / Math.sqrt(wr ** 2 + 1);
     wIn = hIn * wr;
     dCm = conToCm(dIn);
@@ -206,29 +194,13 @@ function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
     diagonalInch = Number(dIn.toFixed(2));
     diagonalCm = Number(dCm.toFixed(2));
   }
-
-  /*
-  // add all values to their respective arrays
-  arrCmValues.splice(0, 0, diagonalCm, widthCm, heightCm);
-  arrInchValues.splice(0, 0, diagonalInch, widthInch, heightInch);
-
-  // call conversion depending on the unit supplied
-  if (wCm || hCm || dCm) {
-    convertToInch(arrCmValues);
-  }
-
-  if (wIn || hIn || dIn) {
-    convertToCm(arrInchValues);
-  }
-
-  */
 }
 
 // cm to inches and vice versa
 const conToCm = (val) => Number((val * 0.394).toFixed(2));
 const conToInch = (val) => Number((val / 2.54).toFixed(2));
 
-// arr method
+// convert value from arr
 function convertToInch(arr) {
   [diagonalInch, widthInch, heightInch] = arr.map((cm) => {
     return Number(cm / (2.54).toFixed(2));
