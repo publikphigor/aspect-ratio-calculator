@@ -123,12 +123,6 @@ function selInputVal() {
   });
 }
 
-asBtn.forEach((btn) =>
-  btn.addEventListener("click", function (e) {
-    selARBtn(e);
-  })
-);
-
 function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
   if (hCm) {
     // if height is passed in cm/inch, calculate width and diagonal in cm/inch
@@ -247,6 +241,14 @@ function clearFields() {
 
 */
 
+asBtn.forEach((btn) => {
+  btn.addEventListener("click", function (e) {
+    selARBtn(e);
+  });
+
+  calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr);
+});
+
 // call calculate function on change in keypress
 allInputFields.forEach((inp) => {
   inp.addEventListener("input", function () {
@@ -258,6 +260,8 @@ allInputFields.forEach((inp) => {
 
 // display values when calc-btn is clicked
 calcBtn.addEventListener("click", function () {
+  calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr);
+
   displayValues();
 });
 
