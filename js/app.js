@@ -76,6 +76,7 @@ let wr = 0.563;
 let hr = 1.777;
 
 // select all input fields
+const inpContainer = document.querySelector(".image-dimensions");
 let allInputFields = document.querySelectorAll(".dimension-input");
 let [dCm, dIn, wCm, wIn, hCm, hIn] = "";
 
@@ -104,7 +105,7 @@ function selARBtn(e) {
   });
 
   e.target.classList.add("active");
-  selAspectRatio = e.path[0].attributes[1].nodeValue - 1;
+  selAspectRatio = e.composedPath()[0].attributes[1].nodeValue - 1;
   wr = ratios[selAspectRatio].wr;
   hr = ratios[selAspectRatio].hr;
 }
@@ -124,6 +125,7 @@ function selInputVal() {
 }
 
 function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
+  if (!wCm && !hCm && !wIn && !wCm && !dCm & !dIn) return;
   if (hCm) {
     // if height is passed in cm/inch, calculate width and diagonal in cm/inch
     dCm = hCm * Math.sqrt(hr ** 2 + 1);
@@ -221,12 +223,14 @@ function convertToCm(arr) {
 
 // display-values function
 function displayValues() {
-  dCm = document.querySelector("#diagonal-cm").value = diagonalCm;
-  dIn = document.querySelector("#diagonal-inches").value = diagonalInch;
-  wCm = document.querySelector("#width-cm").value = widthCm;
-  wIn = document.querySelector("#width-inches").value = widthInch;
-  hCm = document.querySelector("#height-cm").value = heightCm;
-  hIn = document.querySelector("#height-inches").value = heightInch;
+  if (heightCm) {
+    dCm = document.querySelector("#diagonal-cm").value = diagonalCm;
+    dIn = document.querySelector("#diagonal-inches").value = diagonalInch;
+    wCm = document.querySelector("#width-cm").value = widthCm;
+    wIn = document.querySelector("#width-inches").value = widthInch;
+    hCm = document.querySelector("#height-cm").value = heightCm;
+    hIn = document.querySelector("#height-inches").value = heightInch;
+  }
 }
 
 function clearFields() {
@@ -240,21 +244,18 @@ function clearFields() {
 =================================== EVENT HANDLERS ========================================
 
 */
+// select all input values on keypress
+allInputFields.forEach((inp) => {
+  inp.addEventListener("input", function () {
+    selInputVal();
+  });
+});
 
 asBtn.forEach((btn) => {
   btn.addEventListener("click", function (e) {
     selARBtn(e);
-  });
-
-  calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr);
-});
-
-// call calculate function on change in keypress
-allInputFields.forEach((inp) => {
-  inp.addEventListener("input", function () {
-    selInputVal();
-
     calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr);
+    displayValues();
   });
 });
 
@@ -263,6 +264,17 @@ calcBtn.addEventListener("click", function () {
   calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr);
 
   displayValues();
+});
+
+// display values when ENTER key is pressed
+allInputFields.forEach((inp) => {
+  inp.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") {
+      calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr);
+
+      displayValues();
+    }
+  });
 });
 
 // clear inpout fields
