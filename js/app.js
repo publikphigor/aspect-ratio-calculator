@@ -120,8 +120,8 @@ let diagonalInch;
 function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
   if (hCm) {
     // if height is passed in cm/inch, calculate width and diagonal in cm/inch
-    dCm = Math.sqrt((hCm * wr) ** 2 + hCm ** 2);
-    wCm = Number((hCm * wr).toFixed(2));
+    dCm = hCm * Math.sqrt(hr ** 2 + 1);
+    wCm = Number((hCm / wr).toFixed(2));
     dIn = conToInch(dCm);
     hIn = conToInch(hCm);
     wIn = conToInch(wCm);
@@ -132,8 +132,8 @@ function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
     diagonalCm = Number(dCm.toFixed(2));
     diagonalInch = Number(dIn.toFixed(2));
   } else if (hIn) {
-    dIn = Math.sqrt((hIn * wr) ** 2 + hIn ** 2);
-    wIn = Number((hIn * wr).toFixed(2));
+    dIn = hIn * Math.sqrt(hr ** 2 + 1);
+    wIn = Number((hIn / wr).toFixed(2));
     dCm = conToCm(dIn);
     hCm = conToCm(hIn);
     wCm = conToCm(wIn);
@@ -145,8 +145,8 @@ function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
     diagonalCm = Number(dCm.toFixed(2));
   } else if (wCm) {
     // if width is passed in cm/inch, calculate height and diagonal in cm/inch
-    dCm = Math.sqrt((wCm * hr) ** 2 + wCm ** 2);
-    hCm = Number((wCm * hr).toFixed(2));
+    hCm = Number((wCm * wr).toFixed(2));
+    dCm = hCm * Math.sqrt(hr ** 2 + 1);
     dIn = conToInch(dCm);
     hIn = conToInch(hCm);
     wIn = conToInch(wCm);
@@ -157,8 +157,8 @@ function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
     diagonalCm = Number(dCm.toFixed(2));
     diagonalInch = Number(dIn.toFixed(2));
   } else if (wIn) {
-    dIn = Math.sqrt((wIn * hr) ** 2 + wIn ** 2);
-    hIn = Number((wIn * hr).toFixed(2));
+    hIn = Number((wIn * wr).toFixed(2));
+    dIn = hIn * Math.sqrt(hr ** 2 + 1);
     dCm = conToCm(dIn);
     hCm = conToCm(hIn);
     wCm = conToCm(wIn);
@@ -197,7 +197,7 @@ function calcDimensions(wCm, hCm, dCm, wIn, hIn, dIn, wr, hr) {
 }
 
 // cm to inches and vice versa
-const conToCm = (val) => Number((val * 0.394).toFixed(2));
+const conToCm = (val) => Number((val * 2.54).toFixed(2));
 const conToInch = (val) => Number((val / 2.54).toFixed(2));
 
 // convert value from arr
