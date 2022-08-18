@@ -85,12 +85,7 @@ const calcBtn = document.querySelector(".calc-btn");
 const clearBtn = document.querySelector(".clear");
 
 // declare variables for all calculated values
-let widthCm;
-let widthInch;
-let heightCm;
-let heightInch;
-let diagonalCm;
-let diagonalInch;
+let widthCm, widthInch, heightCm, heightInch, diagonalCm, diagonalInch;
 
 /*
 
